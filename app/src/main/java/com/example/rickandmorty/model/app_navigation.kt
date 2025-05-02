@@ -1,24 +1,26 @@
 package com.example.rickandmorty.model
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.*
+import androidx.navigation.navArgument
 import com.example.rickandmorty.view.CharacterDetailView
 import com.example.rickandmorty.view.CharacterListView
 
 @Composable
 fun AppNavigation() {
-    var navController = rememberNavController()
+    val navController = rememberNavController()
 
-    NavHost(
-        navController = navController,
-        startDestination = "characterListView",
-    ) {
-        composable("characterListView") { CharacterListView(navController)}
-        composable("characterDetailView") { CharacterDetailView(navController) }
+    NavHost(navController, startDestination = "characterListView") {
+        composable("characterListView") {
+            CharacterListView(navController)
+        }
+        composable(
+            route = "characterDetailView/{characterId}",
+            arguments = listOf(navArgument("characterId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getInt("characterId") ?: return@composable
+            CharacterDetailView(navController, characterId = id)
+        }
     }
-
 }
