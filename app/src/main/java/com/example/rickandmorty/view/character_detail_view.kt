@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import com.example.rickandmorty.viewmodel.CharacterDetailViewModel
 fun CharacterDetailView(navController: NavController, characterId: Int) {
     val viewModel: CharacterDetailViewModel = viewModel()
     val character = viewModel.character
+    val episode = viewModel.episodes
 
     LaunchedEffect(characterId) {
         viewModel.loadCharacter(characterId)
@@ -85,7 +87,7 @@ fun CharacterDetailView(navController: NavController, characterId: Int) {
                     }
                     Spacer(Modifier.height(10.dp))
                     //            Diveder
-                    HorizontalDivider(thickness = 5.dp)
+                    HorizontalDivider(thickness = 5.dp, color = Color.LightGray)
 //            Episodes
                     Column(modifier = Modifier.fillMaxSize().padding(top = 20.dp)) {
                         Text(
@@ -96,15 +98,23 @@ fun CharacterDetailView(navController: NavController, characterId: Int) {
                             )
                         )
                         Spacer(Modifier.height(10.dp))
-                        LazyColumn {
-                            items(5) { index ->
-                                Row(
-                                    modifier = Modifier
-                                        .padding(vertical = 8.dp),
-                                    verticalAlignment = Alignment.Top
-                                ) {
-                                    Text("• ", fontSize = 18.sp)
-                                    Text("episode", fontSize = 18.sp)
+                        if (episode.isEmpty()) {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                CircularProgressIndicator()
+                            }
+                        } else {
+                            LazyColumn {
+                                items(episode.size) { it ->
+                                    val epis = episode[it]
+                                    Text(
+                                        text = "• Episode ${epis.id}. ${epis.name}",
+                                        fontSize = 22.sp,
+                                        modifier = Modifier.padding(bottom = 10.dp)
+                                    )
+
                                 }
                             }
                         }

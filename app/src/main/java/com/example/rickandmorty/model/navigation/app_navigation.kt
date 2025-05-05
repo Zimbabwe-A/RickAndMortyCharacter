@@ -1,4 +1,4 @@
-package com.example.rickandmorty.model
+package com.example.rickandmorty.model.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
