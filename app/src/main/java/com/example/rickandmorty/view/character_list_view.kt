@@ -117,12 +117,12 @@ fun CharacterListView(
                             )
                             Spacer(Modifier.width(10.dp))
                             Column(
-                                modifier = Modifier.width(250.dp)
+                                modifier = Modifier.width(200.dp)
                             ) {
                                 Text(
                                     text = character.name,
                                     style = TextStyle(
-                                        fontSize = 24.sp,
+                                        fontSize = 22.sp,
                                         fontWeight = FontWeight.W500,
                                     )
                                 )
