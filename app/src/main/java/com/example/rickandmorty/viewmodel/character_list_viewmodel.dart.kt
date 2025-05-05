@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class CharacterListViewModel(
-    private val dataStore: FavoritesSharedPreference
+    private val sharedPreference: FavoritesSharedPreference
 ) : ViewModel() {
 
     var characters by mutableStateOf<List<Character>>(emptyList())
@@ -43,14 +43,14 @@ class CharacterListViewModel(
 
     private fun observeFavorites() {
         viewModelScope.launch {
-            dataStore.favoriteIds.collectLatest {
+            sharedPreference.favoriteIds.collectLatest {
                 favorites = it
             }
         }
     }
 
     fun toggleFavorite(id: Int) {
-        dataStore.toggleFavorite(id)
+        sharedPreference.toggleFavorite(id)
     }
 
     fun getFilteredCharacters(): List<Character> {
@@ -62,11 +62,11 @@ class CharacterListViewModel(
     }
 
     companion object {
-        fun provideFactory(dataStore: FavoritesSharedPreference): ViewModelProvider.Factory {
+        fun provideFactory(sharedPreference: FavoritesSharedPreference): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return CharacterListViewModel(dataStore) as T
+                    return CharacterListViewModel(sharedPreference) as T
                 }
             }
         }
