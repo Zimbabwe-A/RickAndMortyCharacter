@@ -84,10 +84,23 @@ fun CharacterListView(
         }
     ) { innerPad ->
         if (characters.isEmpty()) {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPad), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+            if (viewModel.showOnlyFavorites == true) {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPad), contentAlignment = Alignment.Center) {
+                    Text(
+                        text = "Добавьте в избранное персонажа",
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+            } else {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPad), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
             }
         } else {
             LazyColumn(
