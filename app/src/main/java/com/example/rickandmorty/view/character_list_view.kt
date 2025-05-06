@@ -47,9 +47,11 @@ fun CharacterListView(
 ) {
 
     val context = LocalContext.current
-    val dataStore = remember { FavoritesSharedPreference(context) }
+    val sharedPref = remember { FavoritesSharedPreference(context) }
+    val api = remember { com.example.rickandmorty.model.api.RetrofitInstance.api }
+
     val viewModel: CharacterListViewModel = viewModel(
-        factory = CharacterListViewModel.provideFactory(dataStore)
+        factory = CharacterListViewModel.provideFactory(sharedPref, api)
     )
     val characters = viewModel.getFilteredCharacters()
 
@@ -68,7 +70,7 @@ fun CharacterListView(
                 actions = {
                     IconButton(
                         onClick = {
-                            viewModel.showOnlyFavorites = !viewModel.showOnlyFavorites
+                            viewModel.toggleFavoritesFilter()
                         }
                     ) {
                         Icon(
