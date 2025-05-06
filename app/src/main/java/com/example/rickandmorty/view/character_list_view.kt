@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.rickandmorty.model.api.RetrofitInstance
 import com.example.rickandmorty.model.data.FavoritesSharedPreference
 import com.example.rickandmorty.viewmodel.CharacterListViewModel
 
@@ -48,7 +49,7 @@ fun CharacterListView(
 
     val context = LocalContext.current
     val sharedPref = remember { FavoritesSharedPreference(context) }
-    val api = remember { com.example.rickandmorty.model.api.RetrofitInstance.api }
+    val api = remember { RetrofitInstance.api }
 
     val viewModel: CharacterListViewModel = viewModel(
         factory = CharacterListViewModel.provideFactory(sharedPref, api)
@@ -84,10 +85,23 @@ fun CharacterListView(
         }
     ) { innerPad ->
         if (characters.isEmpty()) {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPad), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+            if (viewModel.showOnlyFavorites == true) {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPad), contentAlignment = Alignment.Center) {
+                    Text(
+                        text = "Добавьте в избранное персонажа",
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+            } else {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPad), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
             }
         } else {
             LazyColumn(
