@@ -5,15 +5,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.model.api.CharacterApi
 import com.example.rickandmorty.model.data.Character
 import com.example.rickandmorty.model.data.FavoritesSharedPreference
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class CharacterListViewModel(
+@HiltViewModel
+class CharacterListViewModel @Inject constructor(
     private val sharedPreference: FavoritesSharedPreference,
     private val characterApi: CharacterApi
 ) : ViewModel() {
@@ -64,17 +66,6 @@ class CharacterListViewModel(
             characters.filter { favorites.contains(it.id.toString()) }
         } else {
             characters
-        }
-    }
-
-    companion object {
-        fun provideFactory(sharedPreference: FavoritesSharedPreference, characterApi: CharacterApi): ViewModelProvider.Factory {
-            return object : ViewModelProvider.Factory {
-                @Suppress("UNCHECKED_CAST")
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return CharacterListViewModel(sharedPreference, characterApi ) as T
-                }
-            }
         }
     }
 }
