@@ -1,4 +1,4 @@
-package com.example.rickandmorty.viewmodel
+package com.example.rickandmorty.feature.character_detail
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

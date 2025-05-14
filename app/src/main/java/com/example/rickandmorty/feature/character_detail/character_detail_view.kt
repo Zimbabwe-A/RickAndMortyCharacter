@@ -1,4 +1,4 @@
-package com.example.rickandmorty.view
+package com.example.rickandmorty.feature.character_detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.rickandmorty.viewmodel.CharacterDetailViewModel
 
 @Composable
 fun CharacterDetailView(navController: NavController, characterId: Int) {

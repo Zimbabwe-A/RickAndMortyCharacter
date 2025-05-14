@@ -1,4 +1,4 @@
-package com.example.rickandmorty.viewmodel
+package com.example.rickandmorty.feature.character_list
 
 import android.util.Log
 import androidx.compose.runtime.getValue

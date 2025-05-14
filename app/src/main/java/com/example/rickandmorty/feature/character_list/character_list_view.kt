@@ -1,4 +1,4 @@
-package com.example.rickandmorty.view
+package com.example.rickandmorty.feature.character_list
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.rickandmorty.viewmodel.CharacterListViewModel
 
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)

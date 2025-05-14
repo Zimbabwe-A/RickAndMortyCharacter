@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
-import com.example.rickandmorty.view.CharacterDetailView
-import com.example.rickandmorty.view.CharacterListView
+import com.example.rickandmorty.feature.character_detail.CharacterDetailView
+import com.example.rickandmorty.feature.character_list.CharacterListView
 
 @Composable
 fun AppNavigation() {
