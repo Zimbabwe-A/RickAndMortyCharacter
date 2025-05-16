@@ -22,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,6 +60,20 @@ fun CharacterListView(
                     )
                 },
                 actions = {
+                    Text(
+                        modifier = Modifier.clickable{
+                            navController.navigate("episodeListView")
+                        },
+                        text = "Episodes",
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp
+                        )
+                    )
+                    VerticalDivider(
+                        modifier = Modifier.padding(start = 20.dp).height(20.dp),
+                        thickness = 2.dp
+                    )
                     IconButton(
                         onClick = {
                             viewModel.toggleFavoritesFilter()

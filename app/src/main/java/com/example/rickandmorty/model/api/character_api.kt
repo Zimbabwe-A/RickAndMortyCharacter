@@ -3,6 +3,7 @@ package com.example.rickandmorty.model.api
 import com.example.rickandmorty.model.data.Character
 import com.example.rickandmorty.model.data.CharacterResponse
 import com.example.rickandmorty.model.data.Episode
+import com.example.rickandmorty.model.data.EpisodeResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Url
@@ -16,5 +17,8 @@ interface CharacterApi {
 
     @GET
     suspend fun getEpisodeByUrl(@Url url: String): Episode
+
+    @GET("episode")
+    suspend fun getEpisodes() : EpisodeResponse
 }
 
