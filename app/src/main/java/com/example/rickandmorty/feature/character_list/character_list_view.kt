@@ -1,4 +1,4 @@
-package com.example.rickandmorty.view
+package com.example.rickandmorty.feature.character_list
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
@@ -22,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +35,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.rickandmorty.viewmodel.CharacterListViewModel
 
 @SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,6 +60,20 @@ fun CharacterListView(
                     )
                 },
                 actions = {
+                    Text(
+                        modifier = Modifier.clickable{
+                            navController.navigate("episodeListView")
+                        },
+                        text = "Episodes",
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp
+                        )
+                    )
+                    VerticalDivider(
+                        modifier = Modifier.padding(start = 20.dp).height(20.dp),
+                        thickness = 2.dp
+                    )
                     IconButton(
                         onClick = {
                             viewModel.toggleFavoritesFilter()
